@@ -338,3 +338,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/NewWindowsExplorerApp/Debug App
+/Debug App/NewWindowsExplorerApp
