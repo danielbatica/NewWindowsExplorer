@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConsoleApplication1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FinderController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FileApiUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WFind.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

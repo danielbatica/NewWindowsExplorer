@@ -1,12 +1,9 @@
 #include "FileApiUtils.h"
 
-DWORD FileApiUtils::GetFullPathForStartingPoint(const TCHAR* startingPoint, LPWSTR* fullPath)
+DWORD FileApiUtils::GetFullPathForStartingPoint(const WCHAR* startingPoint, LPWSTR* fullPath)
 {
 	*fullPath = new TCHAR[MAX_PATH];
-	TCHAR** lppPart = nullptr;
-	DWORD res = GetFullPathName(startingPoint, MAX_PATH, *fullPath, lppPart);
-
-	delete lppPart;
+	DWORD res = GetFullPathName(startingPoint, MAX_PATH, *fullPath, nullptr);
 
 	return res;
 }

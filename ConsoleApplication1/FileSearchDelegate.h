@@ -1,15 +1,17 @@
 #pragma once
+#include "windows.h"
 
-typedef struct _FileSearchDelegateResult {
-	const char* result;
-} FileSearchDelegateResult;
+struct FileSearchDelegateResult {
+	const WCHAR* result;
+};
 
-typedef struct _FileSearchDelegateError {
-	const char* message;
-} FileSearchDelegateError;
+struct FileSearchDelegateError {
+	const WCHAR* message;
+};
 
 class FileSearchDelegate
 {
 public:
-	virtual void onFileFound(FileSearchDelegateResult* result, FileSearchDelegateError* error) = 0;
+	virtual void onFileFound(const FileSearchDelegateResult* result, const FileSearchDelegateError* error) = 0;
+	virtual void onSearchComplete(const WCHAR* expression) = 0;
 };
