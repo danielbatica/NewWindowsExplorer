@@ -30,31 +30,21 @@ using namespace Windows::Storage::Pickers;
 MainPage::MainPage()
 {
 	InitializeComponent();
+	this->fileDataVector = ref new Vector<String^>();
+
+	for (int i = 0; i < 100; ++i) {
+		this->fileDataVector->Append("Some Text" + i);
+	}
 }
 
 
 void NewWindowsExplorerApp::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	greetingOutput->Text = "Hello, " + nameInput->Text + "!";
-
-	//Windows::Storage::Pickers::FolderPicker();
 	FolderPicker^ folderPicker = ref new FolderPicker();
 	folderPicker->SuggestedStartLocation = PickerLocationId::Desktop;
 	folderPicker->FileTypeFilter->Append("*");
 
 	create_task(folderPicker->PickSingleFolderAsync()).then([this](StorageFolder^ folder) {
-
-		const WCHAR* name = (*folder->DisplayName).Data();
-		wcout << name;
-		this->greetingOutput->Text = folder->DisplayName;
-		//cout << *folder->DisplayName;
+		this->nameInput->Text = folder->Path;		
 	});
-
-	/*var folderPicker = new Windows.Storage.Pickers.FolderPicker();
-	folderPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop;
-	folderPicker.FileTypeFilter.Add("*");*/
-
-	/*Windows.Storage.StorageFolder folder = await folderPicker.PickSingleFolderAsync();
-	if (folder != null)
-	{*/
 }
