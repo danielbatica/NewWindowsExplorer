@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "MainPage.xaml.h"
 #include <iostream>
+#include "FinderController.h"
 
 using namespace std;
 using namespace NewWindowsExplorerApp;
@@ -45,6 +46,7 @@ void NewWindowsExplorerApp::MainPage::Button_Click(Platform::Object^ sender, Win
 	folderPicker->FileTypeFilter->Append("*");
 
 	create_task(folderPicker->PickSingleFolderAsync()).then([this](StorageFolder^ folder) {
-		this->nameInput->Text = folder->Path;		
+		this->nameInput->Text = folder->Path;
+		WFind::FinderController::sharedInstance()->startSearchingForFile(folder->Path->Data(), L"*", nullptr);
 	});
 }

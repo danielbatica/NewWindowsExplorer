@@ -5,16 +5,18 @@
 #include <memory>
 #include "FileSearchDelegate.h"
 
-struct FileSearchOptions {
-	bool recursive;
-	FileSearchOptions() : recursive(true) {};
-	FileSearchOptions(bool _recursive) : recursive(_recursive) {};
-};
-
-static const FileSearchOptions DEFAULT_SEARCH_OPTIONS = FileSearchOptions();
-
-class FinderController : FileSearchDelegate
+namespace WFind
 {
+	struct FileSearchOptions {
+		bool recursive;
+		FileSearchOptions() : recursive(true) {};
+		FileSearchOptions(bool _recursive) : recursive(_recursive) {};
+	};
+
+	static const FileSearchOptions DEFAULT_SEARCH_OPTIONS = FileSearchOptions();
+
+	class FinderController : FileSearchDelegate
+	{
 	private:
 		FinderController();
 		~FinderController() = default;
@@ -32,6 +34,5 @@ class FinderController : FileSearchDelegate
 		//// Delegate impl for tests
 		void onFileFound(const FileSearchDelegateResult* result, const FileSearchDelegateError* error) override;
 		void onSearchComplete(const WCHAR* expression) override;
-
+	};
 };
-

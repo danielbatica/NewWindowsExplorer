@@ -5,7 +5,6 @@
 #include "windows.h"
 #include <fileapi.h>
 #include "FinderController.h"
-#define _CRTDBG_MAP_ALLOC
 
 int main(int argc, const WCHAR* argv[])
 {
@@ -33,6 +32,6 @@ int main(int argc, const WCHAR* argv[])
     std::wcout << "Starting Point: " << startingPoint << std::endl;
 	std::wcout << "Expression : " << expression << std::endl;
 
-	FinderController::sharedInstance()->startSearchingForFile(startingPoint, expression, nullptr);
+	WFind::FinderController::sharedInstance()->startSearchingForFile(startingPoint, expression, nullptr);
 
 }

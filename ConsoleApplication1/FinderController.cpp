@@ -7,11 +7,13 @@
 #include "Strsafe.h"
 #pragma comment(lib,"shlwapi.lib")
 
+
 using std::wstring;
 using std::wcout;
 using std::shared_ptr;
 using std::make_shared;
 
+using namespace WFind;
 FinderController::FinderController()
 {
 
@@ -31,10 +33,11 @@ void FinderController::startSearchingForFile(const WCHAR* startingPoint, const W
 	//TODO: check result
 
 	wstring strFolder(fullPathStartingPoint);
-
 	delete fullPathStartingPoint;
 
+#ifdef _DEBUG
 	wcout << "Will actually start from: " << startingPoint << std::endl;
+#endif
 
 	if (!result) {
 		FileSearchDelegateError error{L"Could not get full path from start point param"};
