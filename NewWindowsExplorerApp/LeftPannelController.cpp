@@ -22,7 +22,7 @@ LeftPannelController::~LeftPannelController()
 void LeftPannelController::listFolderContainer(String^ folderPath)
 {
 	m_model->Clear();
-	WFind::FileSearchOptions searchOptions = WFind::FileSearchOptions(false);
+	WFind::FileSearchOptions searchOptions = WFind::FileSearchOptions(false, false, false);
 	//TODO: don't use constant here
 	WFind::FinderController::sharedInstance()->startSearchingForFile(folderPath->Data(), L"*", this, searchOptions);
 }

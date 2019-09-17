@@ -9,8 +9,17 @@ namespace WFind
 {
 	struct FileSearchOptions {
 		bool recursive;
-		FileSearchOptions() : recursive(true) {};
-		FileSearchOptions(bool _recursive) : recursive(_recursive) {};
+		bool addFullPathInResults;
+		bool ignoreLoopbacks;
+
+		FileSearchOptions() : recursive(true), addFullPathInResults(true), ignoreLoopbacks(true) {};
+		FileSearchOptions(bool _recursive, 
+						  bool _addFullPathInResults,
+						  bool _ignoreLoopbacks) :
+
+						  recursive(_recursive),
+						  addFullPathInResults(_addFullPathInResults),
+						  ignoreLoopbacks(_ignoreLoopbacks) {};
 	};
 
 	static const FileSearchOptions DEFAULT_SEARCH_OPTIONS = FileSearchOptions();

@@ -47,6 +47,12 @@ void FinderController::startSearchingForFile(const WCHAR* startingPoint, const W
 	this->findFileInFolder(strFolder, expression, delegate, options);
 }
 
+bool isLoopbackFile(const WCHAR* file) 
+{
+	return (!wcscmp(file, FU_CURRENT_DIRECTORY) ||
+		!wcscmp(file, FU_UPPER_DIRECTORY));
+}
+
 void FinderController::findFileInFolder(const wstring& strFolder, const WCHAR*& expression, FileSearchDelegate* delegate, const FileSearchOptions& options)
 {
 #ifdef _DEBUG
@@ -72,20 +78,30 @@ void FinderController::findFileInFolder(const wstring& strFolder, const WCHAR*& 
 		do {
 			if (INVALID_HANDLE_VALUE != hForNext) {
 				// this needs to be set only when used
+
+				if (true == options.ignoreLoopbacks && isLoopbackFile(findFileData.cFileName)) {
+					continue;
+				}
+
 				if (PathMatchSpecW(findFileData.cFileName, expression)) {
 
-					wstring fullFilePath = currentFolderFullPath + findFileData.cFileName;
-					FileSearchDelegateResult result{ fullFilePath.c_str() };
+					//wstring fullFilePath = currentFolderFullPath + findFileData.cFileName;
+					FileSearchDelegateResult result{ nullptr };
+
+					if (options.addFullPathInResults) {
+						wstring fullFilePath = currentFolderFullPath + findFileData.cFileName;
+						result = FileSearchDelegateResult{ fullFilePath.c_str() };
+					}
+					else {
+						result = FileSearchDelegateResult{ findFileData.cFileName };
+					}
 
 					if (delegate) {
 						delegate->onFileFound(&result, nullptr);
 					}
 				}
 
-				if ((findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) &&
-					wcscmp(findFileData.cFileName, FU_CURRENT_DIRECTORY) &&
-					wcscmp(findFileData.cFileName, FU_UPPER_DIRECTORY)) {
-
+				if ((findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) && !isLoopbackFile(findFileData.cFileName)) {
 					if (true == options.recursive) {
 						opperationQueue->emplace_back(currentFolderFullPath + findFileData.cFileName + L"\\");
 					}
