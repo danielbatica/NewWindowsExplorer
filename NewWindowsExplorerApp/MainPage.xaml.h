@@ -4,8 +4,9 @@
 //
 
 #pragma once
-
+#include <memory>
 #include "MainPage.g.h"
+#include "LeftPannelController.h"
 
 
 
@@ -28,6 +29,7 @@ namespace NewWindowsExplorerApp
 		}
 
 	private:
+		std::unique_ptr<LeftPannelController> leftPannelController;
 		Vector<String^>^ fileDataVector;
 		void Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};

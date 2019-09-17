@@ -32,10 +32,12 @@ MainPage::MainPage()
 {
 	InitializeComponent();
 	this->fileDataVector = ref new Vector<String^>();
+	this->leftPannelController = std::make_unique<LeftPannelController>(LeftPannelController(this->fileDataVector));
 
-	for (int i = 0; i < 100; ++i) {
+
+	/*for (int i = 0; i < 100; ++i) {
 		this->fileDataVector->Append("Some Text" + i);
-	}
+	}*/
 }
 
 
@@ -47,6 +49,7 @@ void NewWindowsExplorerApp::MainPage::Button_Click(Platform::Object^ sender, Win
 
 	create_task(folderPicker->PickSingleFolderAsync()).then([this](StorageFolder^ folder) {
 		this->nameInput->Text = folder->Path;
-		WFind::FinderController::sharedInstance()->startSearchingForFile(folder->Path->Data(), L"*", nullptr);
+		//TODO: do this hardcode in the lib
+		this->leftPannelController->listFolderContainer(folder->Path + "\\");
 	});
 }

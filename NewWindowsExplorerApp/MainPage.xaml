@@ -26,10 +26,10 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <ScrollViewer x:Name="explorerPannel" Grid.Column="0" VerticalScrollBarVisibility="Visible">
+                <ScrollViewer x:Name="explorerPannel" Grid.Column="0" VerticalScrollBarVisibility="Visible"  Margin="0,0,0,10">
                     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="1000">
                         <ListView ItemsSource="{x:Bind FileDataModel}"
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </Grid>
                     <!--<GridView ItemsSource="{x:Bind FileDataModel}"
                               IsItemClickEnabled="True"

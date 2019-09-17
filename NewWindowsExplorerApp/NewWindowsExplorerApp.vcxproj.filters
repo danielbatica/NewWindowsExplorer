@@ -14,9 +14,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="LeftPannelController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="LeftPannelController.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">

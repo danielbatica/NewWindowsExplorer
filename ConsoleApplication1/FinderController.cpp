@@ -2,7 +2,6 @@
 #include "FileApiUtils.h"
 #include <iostream>
 #include <vector>
-//#include <memory>
 #include "Shlwapi.h"
 #include "Strsafe.h"
 #pragma comment(lib,"shlwapi.lib")
@@ -10,8 +9,6 @@
 
 using std::wstring;
 using std::wcout;
-using std::shared_ptr;
-using std::make_shared;
 
 using namespace WFind;
 FinderController::FinderController()
@@ -47,7 +44,7 @@ void FinderController::startSearchingForFile(const WCHAR* startingPoint, const W
 		return;
 	}
 	
-	this->findFileInFolder(strFolder, expression, this, options);
+	this->findFileInFolder(strFolder, expression, delegate, options);
 }
 
 void FinderController::findFileInFolder(const wstring& strFolder, const WCHAR*& expression, FileSearchDelegate* delegate, const FileSearchOptions& options)
@@ -74,7 +71,6 @@ void FinderController::findFileInFolder(const wstring& strFolder, const WCHAR*& 
 #endif
 		do {
 			if (INVALID_HANDLE_VALUE != hForNext) {
-
 				// this needs to be set only when used
 				if (PathMatchSpecW(findFileData.cFileName, expression)) {
 
@@ -85,7 +81,6 @@ void FinderController::findFileInFolder(const wstring& strFolder, const WCHAR*& 
 						delegate->onFileFound(&result, nullptr);
 					}
 				}
-
 
 				if ((findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) &&
 					wcscmp(findFileData.cFileName, FU_CURRENT_DIRECTORY) &&
