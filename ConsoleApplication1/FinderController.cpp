@@ -26,6 +26,7 @@ void FinderController::startSearchingForFile(const WCHAR* startingPoint, const W
 {
 	LPWSTR fullPathStartingPoint = nullptr;
 	//TODO: check if startingPoint is directory
+	
 	DWORD result = FileApiUtils::GetFullPathForStartingPoint(startingPoint, &fullPathStartingPoint);
 	//TODO: check result
 

@@ -41,6 +41,7 @@ void NewWindowsExplorerApp::MainPage::ButtonSearch_Click(Platform::Object^ sende
 	folderPicker->FileTypeFilter->Append("*");
 
 	create_task(folderPicker->PickSingleFolderAsync()).then([this](StorageFolder^ folder) {
+		if (!this) return;
 		this->fullRootPathInput->Text = folder->Path;
 		//TODO: do this hardcode in the lib
 		this->leftPannelController->setRootFolder(folder->Path + "\\");
@@ -60,4 +61,15 @@ void NewWindowsExplorerApp::MainPage::ParrentFolder_Tapped(Platform::Object^ sen
 	}
  
 	delete c_ParrentStr;
+}
+
+
+void NewWindowsExplorerApp::MainPage::LeftFolder_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e)
+{
+	
+	TextBlock^ tb = safe_cast<TextBlock^>(sender);
+
+	String^ newRootPath = this->fullRootPathInput->Text + "\\" + tb->Text;
+	this->fullRootPathInput->Text = newRootPath;
+	this->leftPannelController->setRootFolder(newRootPath + "\\");
 }

@@ -43,7 +43,7 @@
                                             </Grid.ColumnDefinitions>
 
                                             <Image Width="30" Height="30" Margin="5" Source="{x:Bind FileIconPath}" />
-                                            <TextBlock Name="FileName"  Grid.Column="1" Text="{x:Bind FileName}" VerticalAlignment="Center"/>
+                                            <TextBlock Name="FileName"  Grid.Column="1" Text="{x:Bind FileName}" VerticalAlignment="Center" Tapped="LeftFolder_Tapped"/>
                                         </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
