@@ -26,46 +26,31 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border BorderThickness="1" Grid.Column="0">
-                    <ScrollViewer x:Name="leftPannel" 
-                              VerticalScrollBarVisibility="Visible"  Margin="0,0,0,10">
-                    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="1000" BorderThickness="10">
-                            <ListView ItemsSource="{x:Bind FileDataModel}" HorizontalAlignment="Left" VerticalAlignment="Top">
-
-                                <!--<ListViewHeaderItem>
-                                    <TextBlock Name="Status" Text="Nothing to report so far"/>
-                                </ListViewHeaderItem>-->
+                <StackPanel x:Name="leftStack" Grid.Column="0" VerticalAlignment="Stretch">
+                    <ListViewHeaderItem>
+                        <TextBlock Text="Parrent Folder"/>
+                    </ListViewHeaderItem>
+                    <ScrollViewer x:Name="leftPannel" VerticalScrollBarVisibility="Visible"  Margin="0,0,0,10">
+                        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="1000" BorderThickness="10">
+                            <ListView ItemsSource="{x:Bind FileDataModel}" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <ListView.ItemTemplate>
                                     <DataTemplate x:DataType="local:FileModel">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Name="Path" Text="{x:Bind FileName}"/>
-                                        </StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="2*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Width="30" Height="30" Margin="5" Source="{x:Bind FileIconPath}" />
+                                            <TextBlock Name="FileName"  Grid.Column="1" Text="{x:Bind FileName}" VerticalAlignment="Center"/>
+                                        </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
-
                             </ListView>
-                    </Grid>
-                    <!--<GridView ItemsSource="{x:Bind FileDataModel}"
-                              IsItemClickEnabled="True"
-                              IsSwipeEnabled="true"
-                              SelectionMode="Single">
-                        
-                        <GridView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapGrid Orientation="Vertical"/>
-                            </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
-
-                        <GridView.ItemTemplate>
-                            
-                            <DataTemplate>
-                                <TextBlock Text="{Binding}"/>
-                                
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
-                    </GridView>-->
-                </ScrollViewer>
-                </Border>
+                        </Grid>
+                    </ScrollViewer>
+                </StackPanel>
+                
                 <StackPanel x:Name="filter" Grid.Column="1" VerticalAlignment="Stretch">
                 </StackPanel>
             </Grid>

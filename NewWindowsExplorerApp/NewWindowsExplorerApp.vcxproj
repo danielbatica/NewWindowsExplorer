@@ -337,9 +337,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\closed_folder.png" />
-    <Image Include="..\..\..\..\Downloads\open_folder.png" />
+    <Image Include="Assets\closed_folder.png" />
     <Image Include="Assets\LockScreenLogo.scale-200.png" />
+    <Image Include="Assets\open_folder.png" />
     <Image Include="Assets\SplashScreen.scale-200.png" />
     <Image Include="Assets\Square150x150Logo.scale-200.png" />
     <Image Include="Assets\Square44x44Logo.scale-200.png" />

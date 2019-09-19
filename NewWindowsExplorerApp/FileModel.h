@@ -2,6 +2,10 @@
 
 namespace NewWindowsExplorerApp
 {
+	static Platform::String^ OPEN_FOLDER_ICON = "/Assets/open_folder.png";
+	static Platform::String^ CLOSED_FOLDER_ICON = "/Assets/closed_folder.png";
+
+
 	public ref class FileModel sealed
 	{
 	internal:
@@ -15,10 +19,16 @@ namespace NewWindowsExplorerApp
 		property Platform::Boolean IsOpened;
 
 		
-
-		property Platform::Boolean isFolderOpened
+		property Platform::String^ FileIconPath
 		{
-			Platform::Boolean get() { return this->IsFolder && this->IsOpened; }
+			Platform::String^ get() {
+				if (this->IsFolder && this->IsOpened) {
+					return OPEN_FOLDER_ICON;
+				}
+				else {
+					return CLOSED_FOLDER_ICON;
+				}
+			}
 		}
 	};
 };
