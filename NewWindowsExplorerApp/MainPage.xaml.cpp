@@ -25,19 +25,13 @@ using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::Storage;
 using namespace Windows::Storage::Pickers;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
-// https://docs.microsoft.com/en-us/windows/uwp/get-started/create-a-basic-windows-10-app-in-cpp
 MainPage::MainPage()
 {
 	InitializeComponent();
-	this->fileDataVector = ref new Vector<String^>();
+	this->fileDataVector = ref new Vector<FileModel^>();
 	this->leftPannelController = std::make_unique<LeftPannelController>(LeftPannelController(this->fileDataVector));
 
-
-	/*for (int i = 0; i < 100; ++i) {
-		this->fileDataVector->Append("Some Text" + i);
-	}*/
 }
 
 

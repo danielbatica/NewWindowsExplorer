@@ -4,7 +4,8 @@
 namespace WFind
 {
 	struct FileSearchDelegateResult {
-		const WCHAR* result;
+		const WCHAR* fileName;
+		bool isFolder;
 	};
 
 	struct FileSearchDelegateError {

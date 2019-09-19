@@ -82,18 +82,18 @@ void FinderController::findFileInFolder(const wstring& strFolder, const WCHAR*& 
 				if (true == options.ignoreLoopbacks && isLoopbackFile(findFileData.cFileName)) {
 					continue;
 				}
+				bool isFolder = (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY);
 
 				if (PathMatchSpecW(findFileData.cFileName, expression)) {
-
 					//wstring fullFilePath = currentFolderFullPath + findFileData.cFileName;
-					FileSearchDelegateResult result{ nullptr };
-
+					FileSearchDelegateResult result{ nullptr, false };
+					
 					if (options.addFullPathInResults) {
 						wstring fullFilePath = currentFolderFullPath + findFileData.cFileName;
-						result = FileSearchDelegateResult{ fullFilePath.c_str() };
+						result = FileSearchDelegateResult{ fullFilePath.c_str(), isFolder };
 					}
 					else {
-						result = FileSearchDelegateResult{ findFileData.cFileName };
+						result = FileSearchDelegateResult{ findFileData.cFileName, isFolder };
 					}
 
 					if (delegate) {
@@ -101,7 +101,7 @@ void FinderController::findFileInFolder(const wstring& strFolder, const WCHAR*& 
 					}
 				}
 
-				if ((findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) && !isLoopbackFile(findFileData.cFileName)) {
+				if (isFolder && !isLoopbackFile(findFileData.cFileName)) {
 					if (true == options.recursive) {
 						opperationQueue->emplace_back(currentFolderFullPath + findFileData.cFileName + L"\\");
 					}
@@ -134,7 +134,7 @@ void FinderController::onFileFound(const FileSearchDelegateResult* result, const
 		//todo
 		return;
 	}
-	wcout << result->result << std::endl;
+	wcout << result->fileName << std::endl;
 	return;
 }
 

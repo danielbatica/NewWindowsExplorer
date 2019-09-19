@@ -7,7 +7,7 @@
 #include <memory>
 #include "MainPage.g.h"
 #include "LeftPannelController.h"
-
+#include "FileModel.h"
 
 
 namespace NewWindowsExplorerApp
@@ -23,14 +23,14 @@ namespace NewWindowsExplorerApp
 	{
 	public:
 		MainPage();
-		property IVector<String^>^ FileDataModel
+		property IVector<FileModel^>^ FileDataModel
 		{
-			IVector<String^>^ get() { return this->fileDataVector; };
+			IVector<FileModel^>^ get() { return this->fileDataVector; };
 		}
 
 	private:
 		std::unique_ptr<LeftPannelController> leftPannelController;
-		Vector<String^>^ fileDataVector;
+		Vector<FileModel^>^ fileDataVector;
 		void Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }

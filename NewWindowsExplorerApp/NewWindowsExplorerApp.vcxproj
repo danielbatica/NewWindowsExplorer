@@ -312,6 +312,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FileModel.h" />
     <ClInclude Include="LeftPannelController.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
@@ -320,6 +321,7 @@
     <ClInclude Include="MainPage.xaml.h">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -335,6 +337,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\closed_folder.png" />
+    <Image Include="..\..\..\..\Downloads\open_folder.png" />
     <Image Include="Assets\LockScreenLogo.scale-200.png" />
     <Image Include="Assets\SplashScreen.scale-200.png" />
     <Image Include="Assets\Square150x150Logo.scale-200.png" />

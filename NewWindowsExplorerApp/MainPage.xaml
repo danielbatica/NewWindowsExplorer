@@ -26,10 +26,24 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <ScrollViewer x:Name="explorerPannel" Grid.Column="0" VerticalScrollBarVisibility="Visible"  Margin="0,0,0,10">
-                    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="1000">
-                        <ListView ItemsSource="{x:Bind FileDataModel}"
-                                    HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Border BorderThickness="1" Grid.Column="0">
+                    <ScrollViewer x:Name="leftPannel" 
+                              VerticalScrollBarVisibility="Visible"  Margin="0,0,0,10">
+                    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="1000" BorderThickness="10">
+                            <ListView ItemsSource="{x:Bind FileDataModel}" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+                                <!--<ListViewHeaderItem>
+                                    <TextBlock Name="Status" Text="Nothing to report so far"/>
+                                </ListViewHeaderItem>-->
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="local:FileModel">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Name="Path" Text="{x:Bind FileName}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                            </ListView>
                     </Grid>
                     <!--<GridView ItemsSource="{x:Bind FileDataModel}"
                               IsItemClickEnabled="True"
@@ -51,7 +65,7 @@
                         </GridView.ItemTemplate>
                     </GridView>-->
                 </ScrollViewer>
-
+                </Border>
                 <StackPanel x:Name="filter" Grid.Column="1" VerticalAlignment="Stretch">
                 </StackPanel>
             </Grid>

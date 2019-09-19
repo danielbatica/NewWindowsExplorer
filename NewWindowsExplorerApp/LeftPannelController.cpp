@@ -5,7 +5,7 @@
 using namespace NewWindowsExplorerApp;
 
 ///// Constructor
-LeftPannelController::LeftPannelController(Vector<String^>^ model)
+LeftPannelController::LeftPannelController(Vector<FileModel^>^ model)
 {
 	m_model = model;
 }
@@ -21,8 +21,8 @@ LeftPannelController::~LeftPannelController()
 ///// API
 void LeftPannelController::listFolderContainer(String^ folderPath)
 {
-	m_model->Clear();
-	WFind::FileSearchOptions searchOptions = WFind::FileSearchOptions(false, false, false);
+	m_model->Clear(); 
+	WFind::FileSearchOptions searchOptions = WFind::FileSearchOptions(false, false, true);
 	//TODO: don't use constant here
 	WFind::FinderController::sharedInstance()->startSearchingForFile(folderPath->Data(), L"*", this, searchOptions);
 }
@@ -32,8 +32,11 @@ void LeftPannelController::listFolderContainer(String^ folderPath)
 void LeftPannelController::onFileFound(const WFind::FileSearchDelegateResult* result, const WFind::FileSearchDelegateError* error)
 {
 	if (m_model && !error) {
-		String^ fileName = ref new String(result->result);
-		m_model->Append(fileName);
+		// add only folders
+		if (result->isFolder) {
+			FileModel^ fileDetails = ref new FileModel(result->fileName, result->isFolder);
+			m_model->Append(fileDetails);
+		}
 	}
 }
 

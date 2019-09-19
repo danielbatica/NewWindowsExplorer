@@ -1,5 +1,6 @@
 #pragma once
 #include "FileSearchDelegate.h"
+#include "FileModel.h"
 
 namespace NewWindowsExplorerApp
 {
@@ -10,9 +11,9 @@ namespace NewWindowsExplorerApp
 	class LeftPannelController : WFind::FileSearchDelegate
 	{
 	private:
-		Vector<String^>^ m_model;
+		Vector<FileModel^>^ m_model;
 	public:
-		LeftPannelController(Vector<String^>^ model);
+		LeftPannelController(Vector<FileModel^>^ model);
 		~LeftPannelController();
 
 		///// API
