@@ -16,6 +16,7 @@ namespace WFind
 	{
 	public:
 		static DWORD GetFullPathForStartingPoint(const WCHAR* startingPoint, LPWSTR* fullPath);
+		static void GetParrentForFolder(const WCHAR* fullPath, WCHAR** result);
 	};
 };
 

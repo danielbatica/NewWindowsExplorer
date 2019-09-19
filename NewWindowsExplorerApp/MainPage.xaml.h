@@ -23,14 +23,16 @@ namespace NewWindowsExplorerApp
 	{
 	public:
 		MainPage();
-		property IVector<FileModel^>^ FileDataModel
+
+		//// Models used by Page
+		property IVector<FileModel^>^ LeftPannelFoldersModel
 		{
-			IVector<FileModel^>^ get() { return this->fileDataVector; };
+			IVector<FileModel^>^ get() { return this->leftPannelController->getLeftPannelFolders(); };
 		}
 
 	private:
 		std::unique_ptr<LeftPannelController> leftPannelController;
-		Vector<FileModel^>^ fileDataVector;
-		void Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void ButtonSearch_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void ParrentFolder_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e);
 	};
 }

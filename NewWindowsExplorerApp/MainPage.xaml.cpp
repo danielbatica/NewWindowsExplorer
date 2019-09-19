@@ -7,6 +7,7 @@
 #include "MainPage.xaml.h"
 #include <iostream>
 #include "FinderController.h"
+#include "FileApiUtils.h"
 
 using namespace std;
 using namespace NewWindowsExplorerApp;
@@ -29,21 +30,34 @@ using namespace Windows::Storage::Pickers;
 MainPage::MainPage()
 {
 	InitializeComponent();
-	this->fileDataVector = ref new Vector<FileModel^>();
-	this->leftPannelController = std::make_unique<LeftPannelController>(LeftPannelController(this->fileDataVector));
-
+	this->leftPannelController = std::make_unique<LeftPannelController>(LeftPannelController());
 }
 
 
-void NewWindowsExplorerApp::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void NewWindowsExplorerApp::MainPage::ButtonSearch_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	FolderPicker^ folderPicker = ref new FolderPicker();
 	folderPicker->SuggestedStartLocation = PickerLocationId::Desktop;
 	folderPicker->FileTypeFilter->Append("*");
 
 	create_task(folderPicker->PickSingleFolderAsync()).then([this](StorageFolder^ folder) {
-		this->nameInput->Text = folder->Path;
+		this->fullRootPathInput->Text = folder->Path;
 		//TODO: do this hardcode in the lib
-		this->leftPannelController->listFolderContainer(folder->Path + "\\");
+		this->leftPannelController->setRootFolder(folder->Path + "\\");
 	});
+}
+
+
+void NewWindowsExplorerApp::MainPage::ParrentFolder_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e)
+{
+	WCHAR* c_ParrentStr = nullptr;
+	WFind::FileApiUtils::GetParrentForFolder(this->fullRootPathInput->Text->Begin(), &c_ParrentStr);
+
+	if (c_ParrentStr) {
+		String^ newPath = ref new String(c_ParrentStr);
+		this->fullRootPathInput->Text = newPath;
+		this->leftPannelController->setRootFolder(newPath + "\\");
+	}
+ 
+	delete c_ParrentStr;
 }
