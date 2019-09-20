@@ -26,12 +26,16 @@ void FinderController::startSearchingForFile(const WCHAR* startingPoint, const W
 {
 	LPWSTR fullPathStartingPoint = nullptr;
 	//TODO: check if startingPoint is directory
-	
 	DWORD result = FileApiUtils::GetFullPathForStartingPoint(startingPoint, &fullPathStartingPoint);
 	//TODO: check result
 
 	wstring strFolder(fullPathStartingPoint);
 	delete fullPathStartingPoint;
+
+	
+	if (FU_FOLDER_ENDING_CHARACTER != strFolder.at(strFolder.size() - 1)) {
+		strFolder += FU_FOLDER_ENDING_CHARACTER;
+	}
 
 #ifdef _DEBUG
 	wcout << "Will actually start from: " << startingPoint << std::endl;

@@ -30,7 +30,7 @@ using namespace Windows::Storage::Pickers;
 MainPage::MainPage()
 {
 	InitializeComponent();
-	this->leftPannelController = std::make_unique<LeftPannelController>(LeftPannelController());
+	this->leftPannelController = std::make_shared<LeftPannelController>(LeftPannelController());
 }
 
 
@@ -40,11 +40,12 @@ void NewWindowsExplorerApp::MainPage::ButtonSearch_Click(Platform::Object^ sende
 	folderPicker->SuggestedStartLocation = PickerLocationId::Desktop;
 	folderPicker->FileTypeFilter->Append("*");
 
-	create_task(folderPicker->PickSingleFolderAsync()).then([this](StorageFolder^ folder) {
-		if (!this) return;
-		this->fullRootPathInput->Text = folder->Path;
-		//TODO: do this hardcode in the lib
-		this->leftPannelController->setRootFolder(folder->Path + "\\");
+	TextBox^ fullRootPathInput = this->fullRootPathInput;
+	std::shared_ptr<LeftPannelController> leftPannelController = this->leftPannelController;
+	create_task(folderPicker->PickSingleFolderAsync()).then([fullRootPathInput, leftPannelController](StorageFolder^ folder) {
+		
+		fullRootPathInput->Text = folder->Path;
+		leftPannelController->setRootFolder(folder->Path);
 	});
 }
 
@@ -57,7 +58,7 @@ void NewWindowsExplorerApp::MainPage::ParrentFolder_Tapped(Platform::Object^ sen
 	if (c_ParrentStr) {
 		String^ newPath = ref new String(c_ParrentStr);
 		this->fullRootPathInput->Text = newPath;
-		this->leftPannelController->setRootFolder(newPath + "\\");
+		this->leftPannelController->setRootFolder(newPath);
 	}
  
 	delete c_ParrentStr;
@@ -71,5 +72,5 @@ void NewWindowsExplorerApp::MainPage::LeftFolder_Tapped(Platform::Object^ sender
 
 	String^ newRootPath = this->fullRootPathInput->Text + "\\" + tb->Text;
 	this->fullRootPathInput->Text = newRootPath;
-	this->leftPannelController->setRootFolder(newRootPath + "\\");
+	this->leftPannelController->setRootFolder(newRootPath);
 }

@@ -15,8 +15,9 @@ namespace WFind
 	class FileApiUtils
 	{
 	public:
-		static DWORD GetFullPathForStartingPoint(const WCHAR* startingPoint, LPWSTR* fullPath);
-		static void GetParrentForFolder(const WCHAR* fullPath, WCHAR** result);
+		static DWORD  GetFullPathForStartingPoint(const WCHAR* startingPoint, LPWSTR* fullPath);
+		static void   GetParrentForFolder(const WCHAR* fullPath, WCHAR** result);
+		static void   AddEndingSlashToFolder(const WCHAR* fullPath, WCHAR** result);
 	};
 };
 
