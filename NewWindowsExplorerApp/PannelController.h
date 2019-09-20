@@ -8,6 +8,7 @@ namespace NewWindowsExplorerApp
 	using namespace Platform::Collections;
 	using namespace Windows::Foundation::Collections;
 
+	///
 	class PannelController : WFind::FileSearchDelegate
 	{
 

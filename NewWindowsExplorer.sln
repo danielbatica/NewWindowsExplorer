@@ -7,6 +7,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WFind", "ConsoleApplication
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NewWindowsExplorerApp", "NewWindowsExplorerApp\NewWindowsExplorerApp.vcxproj", "{A4063B43-0E3A-48A0-A926-47B6C72D6FDE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A08AA752-D03B-4294-8CAB-0CF73932DEC7}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug App|ARM = Debug App|ARM

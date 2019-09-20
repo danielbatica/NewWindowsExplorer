@@ -52,9 +52,18 @@
                     </ScrollViewer>
                 </StackPanel>
                 
-                <StackPanel Grid.Column="1" VerticalAlignment="Stretch">
-                    <ListViewHeaderItem>
-                        <TextBlock Text="Files"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Stretch" x:Name="rightStack">
+                    <ListViewHeaderItem x:Name="rightHeader" Margin="0,0,0,0">
+
+                        <Grid Width="{Binding ActualWidth, ElementName=rightStack}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Files"  Grid.Column="0"/>
+
+                            <TextBox PlaceholderText="Filter expression" BorderBrush="Transparent" Grid.Column="1" HorizontalAlignment="Left"/>
+                        </Grid>
                     </ListViewHeaderItem>
                     <ScrollViewer x:Name="rightPannel" VerticalScrollBarVisibility="Visible"  Margin="0,0,0,10">
                         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="1000" BorderThickness="10">
