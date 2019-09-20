@@ -14,13 +14,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="LeftPannelController.cpp" />
+    <ClCompile Include="PannelController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="LeftPannelController.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="FileModel.h" />
+    <ClInclude Include="PannelController.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">
@@ -48,6 +48,9 @@
       <Filter>Assets</Filter>
     </Image>
     <Image Include="Assets\closed_folder.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\file.png">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>

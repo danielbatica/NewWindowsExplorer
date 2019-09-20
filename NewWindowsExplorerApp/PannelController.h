@@ -8,16 +8,18 @@ namespace NewWindowsExplorerApp
 	using namespace Platform::Collections;
 	using namespace Windows::Foundation::Collections;
 
-	class LeftPannelController : WFind::FileSearchDelegate
+	class PannelController : WFind::FileSearchDelegate
 	{
 
 	private:
-		Vector<FileModel^>^ m_model;
+		Vector<FileModel^>^ m_leftModel;
+		Vector<FileModel^>^ m_rightModel;
 		String^ m_rootPath;
+		bool addDataOnlyInRightPannel;// todo: use better mechanism than this, concurency issues
 
 	public:
-		LeftPannelController();
-		~LeftPannelController();
+		PannelController();
+		~PannelController();
 
 		///// API Controller
 		void setRootFolder(String^ fullFolderPath);
@@ -25,6 +27,7 @@ namespace NewWindowsExplorerApp
 
 		///// API Model
 		Vector<FileModel^>^ getLeftPannelFolders();
+		Vector<FileModel^>^ getRightPannelFolders();
 
 		///////// WFind::FileSearchDelegate impl
 		void onFileFound(const WFind::FileSearchDelegateResult* result, const WFind::FileSearchDelegateError* error) override;

@@ -30,7 +30,7 @@ using namespace Windows::Storage::Pickers;
 MainPage::MainPage()
 {
 	InitializeComponent();
-	this->leftPannelController = std::make_shared<LeftPannelController>(LeftPannelController());
+	this->leftPannelController = std::make_shared<PannelController>(PannelController());
 }
 
 
@@ -41,9 +41,8 @@ void NewWindowsExplorerApp::MainPage::ButtonSearch_Click(Platform::Object^ sende
 	folderPicker->FileTypeFilter->Append("*");
 
 	TextBox^ fullRootPathInput = this->fullRootPathInput;
-	std::shared_ptr<LeftPannelController> leftPannelController = this->leftPannelController;
+	std::shared_ptr<PannelController> leftPannelController = this->leftPannelController;
 	create_task(folderPicker->PickSingleFolderAsync()).then([fullRootPathInput, leftPannelController](StorageFolder^ folder) {
-		
 		fullRootPathInput->Text = folder->Path;
 		leftPannelController->setRootFolder(folder->Path);
 	});
@@ -67,7 +66,13 @@ void NewWindowsExplorerApp::MainPage::ParrentFolder_Tapped(Platform::Object^ sen
 
 void NewWindowsExplorerApp::MainPage::LeftFolder_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e)
 {
-	
+	TextBlock^ tb = safe_cast<TextBlock^>(sender);
+	this->leftPannelController->listFolderContainer(tb->Text);
+}
+
+
+void NewWindowsExplorerApp::MainPage::LeftFolder_DoubleTapped(Platform::Object^ sender, Windows::UI::Xaml::Input::DoubleTappedRoutedEventArgs^ e)
+{
 	TextBlock^ tb = safe_cast<TextBlock^>(sender);
 
 	String^ newRootPath = this->fullRootPathInput->Text + "\\" + tb->Text;

@@ -313,7 +313,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FileModel.h" />
-    <ClInclude Include="LeftPannelController.h" />
+    <ClInclude Include="PannelController.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
       <DependentUpon>App.xaml</DependentUpon>
@@ -338,6 +338,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\closed_folder.png" />
+    <Image Include="Assets\file.png" />
     <Image Include="Assets\LockScreenLogo.scale-200.png" />
     <Image Include="Assets\open_folder.png" />
     <Image Include="Assets\SplashScreen.scale-200.png" />
@@ -351,7 +352,7 @@
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="LeftPannelController.cpp" />
+    <ClCompile Include="PannelController.cpp" />
     <ClCompile Include="MainPage.xaml.cpp">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClCompile>

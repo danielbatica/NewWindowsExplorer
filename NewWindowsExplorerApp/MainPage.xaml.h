@@ -6,7 +6,7 @@
 #pragma once
 #include <memory>
 #include "MainPage.g.h"
-#include "LeftPannelController.h"
+#include "PannelController.h"
 #include "FileModel.h"
 
 
@@ -30,10 +30,16 @@ namespace NewWindowsExplorerApp
 			IVector<FileModel^>^ get() { return this->leftPannelController->getLeftPannelFolders(); };
 		}
 
+		property IVector<FileModel^>^ RightPannelFoldersModel
+		{
+			IVector<FileModel^>^ get() { return this->leftPannelController->getRightPannelFolders(); };
+		}
+
 	private:
-		std::shared_ptr<LeftPannelController> leftPannelController;
+		std::shared_ptr<PannelController> leftPannelController;
 		void ButtonSearch_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void ParrentFolder_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e);
 		void LeftFolder_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e);
+		void LeftFolder_DoubleTapped(Platform::Object^ sender, Windows::UI::Xaml::Input::DoubleTappedRoutedEventArgs^ e);
 	};
 }

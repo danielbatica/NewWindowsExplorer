@@ -33,7 +33,32 @@
                     </ListViewHeaderItem>
                     <ScrollViewer x:Name="leftPannel" VerticalScrollBarVisibility="Visible"  Margin="0,0,0,10">
                         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="1000" BorderThickness="10">
-                            <ListView ItemsSource="{x:Bind LeftPannelFoldersModel}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <ListView ItemsSource="{x:Bind LeftPannelFoldersModel, Mode=OneWay }" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="local:FileModel">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="2*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Width="30" Height="30" Margin="5" Source="{x:Bind FileIconPath, Mode=OneWay}" />
+                                            <TextBlock Name="FileName"  Grid.Column="1" Text="{x:Bind FileName}" VerticalAlignment="Center" Tapped="LeftFolder_Tapped" DoubleTapped="LeftFolder_DoubleTapped"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+                    </ScrollViewer>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="1" VerticalAlignment="Stretch">
+                    <ListViewHeaderItem>
+                        <TextBlock Text="Files"/>
+                    </ListViewHeaderItem>
+                    <ScrollViewer x:Name="rightPannel" VerticalScrollBarVisibility="Visible"  Margin="0,0,0,10">
+                        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="1000" BorderThickness="10">
+                            <ListView ItemsSource="{x:Bind RightPannelFoldersModel}" HorizontalAlignment="Left" VerticalAlignment="Top">
                                 <ListView.ItemTemplate>
                                     <DataTemplate x:DataType="local:FileModel">
                                         <Grid>
@@ -43,16 +68,13 @@
                                             </Grid.ColumnDefinitions>
 
                                             <Image Width="30" Height="30" Margin="5" Source="{x:Bind FileIconPath}" />
-                                            <TextBlock Name="FileName"  Grid.Column="1" Text="{x:Bind FileName}" VerticalAlignment="Center" Tapped="LeftFolder_Tapped"/>
+                                            <TextBlock Name="FileName"  Grid.Column="1" Text="{x:Bind FileName}" VerticalAlignment="Center"/>
                                         </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
                         </Grid>
                     </ScrollViewer>
-                </StackPanel>
-                
-                <StackPanel x:Name="filter" Grid.Column="1" VerticalAlignment="Stretch">
                 </StackPanel>
             </Grid>
 
