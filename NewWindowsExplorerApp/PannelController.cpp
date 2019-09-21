@@ -2,6 +2,7 @@
 #include "PannelController.h"
 #include "FinderController.h"
 #include "FileApiUtils.h"
+#include <regex>
 
 using namespace NewWindowsExplorerApp;
 
@@ -10,6 +11,8 @@ PannelController::PannelController()
 {
 	m_leftModel  = ref new Vector<FileModel^>();
 	m_rightModel = ref new Vector<FileModel^>();
+	m_rightModelFilter = ref new Vector<FileModel^>();
+
 	m_rootPath = nullptr;
 	addDataOnlyInRightPannel = false;
 }
@@ -24,6 +27,10 @@ PannelController::~PannelController()
 	if (m_rightModel) {
 		m_rightModel->Clear();
 	}
+
+	if (m_rightModelFilter) {
+		m_rightModelFilter->Clear();
+	}
 }
 
 
@@ -32,6 +39,8 @@ void PannelController::setRootFolder(String^ fullFolderPath)
 {
 	m_leftModel->Clear();
 	m_rightModel->Clear();
+	m_rightModelFilter->Clear();
+
 	addDataOnlyInRightPannel = false;
 
 	WFind::FileSearchOptions searchOptions = WFind::FileSearchOptions(false, false, true);
@@ -43,6 +52,7 @@ void PannelController::setRootFolder(String^ fullFolderPath)
 void PannelController::listFolderContainer(String^ folderPath)
 {
 	m_rightModel->Clear();
+	m_rightModelFilter->Clear();
 	addDataOnlyInRightPannel = true;
 
 	for (auto& file : m_leftModel) {
@@ -54,6 +64,34 @@ void PannelController::listFolderContainer(String^ folderPath)
 	WFind::FinderController::sharedInstance()->startSearchingForFile(fullPathFolder->Data(), WFind::FU_WILDCARD, this, searchOptions);
 }
 
+void NewWindowsExplorerApp::PannelController::filterRightPannelOnExpression(const WCHAR* expression)
+{
+	String^ strExpression = ref new String(expression);
+	if (!strExpression->Length()) {
+		strExpression = ref new String(WFind::FU_WILDCARD);
+	}
+	m_rightModelFilter->Clear();
+
+	
+	
+	std::cmatch narrowMatch;
+	std::basic_regex<WCHAR> rx;
+	try {
+		rx = std::basic_regex<WCHAR>(strExpression->Begin(), std::regex_constants::grep | std::regex_constants::icase);
+	} catch (const std::regex_error& e) {
+		wprintf(L"Error when searching %hs", e.what());
+		return;
+	}
+
+	for (auto& fileModel : m_rightModel) {
+		bool found = std::regex_search(fileModel->FileName->Begin(), rx);
+		found |= WFind::FinderController::sharedInstance()->filePathMatchesExpression(fileModel->FileName->Begin(), strExpression->Begin());
+		if (found) {
+			m_rightModelFilter->Append(fileModel);
+		}
+	}
+}
+
 ///// API Model
 Vector<FileModel^>^ PannelController::getLeftPannelFolders()
 {
@@ -62,8 +100,10 @@ Vector<FileModel^>^ PannelController::getLeftPannelFolders()
 
 Vector<FileModel^>^ PannelController::getRightPannelFolders()
 {
-	return this->m_rightModel;
+	return this->m_rightModelFilter;
+	//return this->m_rightModel;
 }
+
 
 ///////// WFind::FileSearchDelegate impl
 void PannelController::onFileFound(const WFind::FileSearchDelegateResult* result, const WFind::FileSearchDelegateError* error)
@@ -77,6 +117,7 @@ void PannelController::onFileFound(const WFind::FileSearchDelegateResult* result
 
 		if (m_rightModel) {
 			m_rightModel->Append(fileDetails);
+			m_rightModelFilter->Append(fileDetails);
 		}
 	}
 }

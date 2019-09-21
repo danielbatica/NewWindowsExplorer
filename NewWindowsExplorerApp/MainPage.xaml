@@ -28,7 +28,7 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel x:Name="leftStack" Grid.Column="0" VerticalAlignment="Stretch">
-                    <ListViewHeaderItem>
+                    <ListViewHeaderItem x:Name="leftHeader">
                         <TextBlock Text="Parrent Folder" Tapped="ParrentFolder_Tapped"/>
                     </ListViewHeaderItem>
                     <ScrollViewer x:Name="leftPannel" VerticalScrollBarVisibility="Visible"  Margin="0,0,0,10">
@@ -53,16 +53,14 @@
                 </StackPanel>
                 
                 <StackPanel Grid.Column="1" VerticalAlignment="Stretch" x:Name="rightStack">
-                    <ListViewHeaderItem x:Name="rightHeader" Margin="0,0,0,0">
-
-                        <Grid Width="{Binding ActualWidth, ElementName=rightStack}">
+                    <ListViewHeaderItem x:Name="rightHeader" Margin="0,0,0,0" VerticalAlignment="Stretch">
+                        <Grid Width="{Binding ActualWidth, ElementName=rightHeader}" Height="Auto">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Files"  Grid.Column="0"/>
-
-                            <TextBox PlaceholderText="Filter expression" BorderBrush="Transparent" Grid.Column="1" HorizontalAlignment="Left"/>
+                            <TextBox x:Name="filterTb" PlaceholderText="Filter expression (e.g: *.txt)" BorderBrush="Transparent" Grid.Column="1" HorizontalAlignment="Left" TextChanged="TextChanged_FilterTb"/>
                         </Grid>
                     </ListViewHeaderItem>
                     <ScrollViewer x:Name="rightPannel" VerticalScrollBarVisibility="Visible"  Margin="0,0,0,10">

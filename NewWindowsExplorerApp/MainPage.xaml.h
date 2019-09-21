@@ -27,19 +27,20 @@ namespace NewWindowsExplorerApp
 		//// Models used by Page
 		property IVector<FileModel^>^ LeftPannelFoldersModel
 		{
-			IVector<FileModel^>^ get() { return this->leftPannelController->getLeftPannelFolders(); };
+			IVector<FileModel^>^ get() { return this->pannelController->getLeftPannelFolders(); };
 		}
 
 		property IVector<FileModel^>^ RightPannelFoldersModel
 		{
-			IVector<FileModel^>^ get() { return this->leftPannelController->getRightPannelFolders(); };
+			IVector<FileModel^>^ get() { return this->pannelController->getRightPannelFolders(); };
 		}
 
 	private:
-		std::shared_ptr<PannelController> leftPannelController;
+		std::shared_ptr<PannelController> pannelController;
 		void ButtonSearch_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void ParrentFolder_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e);
 		void LeftFolder_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e);
 		void LeftFolder_DoubleTapped(Platform::Object^ sender, Windows::UI::Xaml::Input::DoubleTappedRoutedEventArgs^ e);
+		void TextChanged_FilterTb(Platform::Object^ sender, Windows::UI::Xaml::Controls::TextChangedEventArgs^ e);
 	};
 }

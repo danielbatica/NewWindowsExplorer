@@ -14,13 +14,13 @@ int main(int argc, const WCHAR* argv[])
 	}
 
 #ifdef _DEBUG
-	//const TCHAR startingPoint[] = L"C:\\Users\\labuser\\source\\repos\\ConsoleApplication1\\ConsoleApplication1";
+	const TCHAR startingPoint[] = L"C:\\Users\\labuser\\source\\repos\\ConsoleApplication1\\ConsoleApplication1";
 	//const TCHAR startingPoint[] = L"../../../../";
-	const WCHAR startingPoint[] = L"C:/";
+	//const WCHAR startingPoint[] = L"C:/";
 	
-	const WCHAR expression[] = L"*.txt";
+	//const WCHAR expression[] = L"*.txt";
 
-	/*const TCHAR expression[] = L"ConsoleApplication1.cpp";*/
+	const TCHAR expression[] = L"Fi?derController.cpp";
 #else
 	const WCHAR startingPoint[] = L"C:/";
 	const WCHAR expression[] = L"ConsoleApplication1";
