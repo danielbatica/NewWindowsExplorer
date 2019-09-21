@@ -135,20 +135,3 @@ void FinderController::findFileInFolder(const wstring& strFolder, const WCHAR*& 
 	std::cout << "Searched in: " << numfiles << " files\r\n";
 #endif
 }
-
-
-////////////// Delegate impl
-void FinderController::onFileFound(const FileSearchDelegateResult* result, const FileSearchDelegateError* error) 
-{
-	if (error || !result) {
-		//todo
-		return;
-	}
-	wcout << result->fileName << std::endl;
-	return;
-}
-
-void FinderController::onSearchComplete(const WCHAR* expression)
-{
-	wcout << L"Finished search for: " << expression;
-}

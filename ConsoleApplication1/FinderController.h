@@ -24,7 +24,7 @@ namespace WFind
 
 	static const FileSearchOptions DEFAULT_SEARCH_OPTIONS = FileSearchOptions();
 
-	class FinderController : FileSearchDelegate
+	class FinderController
 	{
 	private:
 		FinderController();
@@ -40,9 +40,5 @@ namespace WFind
 		//// API
 		void startSearchingForFile(const WCHAR* startingPoint, const WCHAR* expression, FileSearchDelegate* delegate, const FileSearchOptions& options = DEFAULT_SEARCH_OPTIONS);
 		bool filePathMatchesExpression(const WCHAR* startingPoint, const WCHAR* expression);
-
-		//// Delegate impl for tests
-		void onFileFound(const FileSearchDelegateResult* result, const FileSearchDelegateError* error) override;
-		void onSearchComplete(const WCHAR* expression) override;
 	};
 };
