@@ -345,3 +345,5 @@ healthchecksdb
 /Debug App
 /ConsoleApplication1/Debug App
 /NewWindowsExplorerApp/Debug Lib
+/ConsoleApplication1/Release Lib/WFind.tlog
+/Release Lib

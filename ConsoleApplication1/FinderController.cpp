@@ -97,8 +97,9 @@ void FinderController::findFileInFolder(const wstring& strFolder, const WCHAR*& 
 
 				if (PathMatchSpecW(findFileData.cFileName, expression)) {
 					FileSearchDelegateResult result{ nullptr, false };
+					wstring fullFilePath;
 					if (options.addFullPathInResults) {
-						wstring fullFilePath = currentFolderFullPath + findFileData.cFileName;
+						fullFilePath = currentFolderFullPath + findFileData.cFileName;
 						result = FileSearchDelegateResult{ fullFilePath.c_str(), isFolder };
 					}
 					else {
