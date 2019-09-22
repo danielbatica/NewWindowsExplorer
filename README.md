@@ -7,6 +7,11 @@ NewWindowsExplorer is a solution comprised of three buildable units:
 
 ## Building Targets
 
+### Prerequisites 
+
+* min target version: 10.0.17763.0
+
+### Available Build/Run Targets
 The following targets are available:
 
 * Debug App - only for NewWindowsExplorerApp
